@@ -15,6 +15,7 @@ results driven webs/apps`;
         title={"Zenux.dev"}
         text={text}
         textColor={"text-black"}
+        titleClassName={"leading-[0.92] sm:leading-[0.95]"}
       />
       <figure
         className="absolute inset-0 -z-50"

@@ -8,6 +8,7 @@ const AnimatedHeaderSection = ({
   title,
   text,
   textColor,
+  titleClassName = "",
   withScrollTrigger = false,
 }) => {
   const contextRef = useRef(null);
@@ -52,7 +53,7 @@ const AnimatedHeaderSection = ({
           </p>
           <div className="px-10">
             <h1
-              className={`flex flex-col gap-12 uppercase banner-text-responsive sm:gap-16 md:block ${textColor}`}
+              className={`flex flex-col gap-12 uppercase banner-text-responsive sm:gap-16 md:block ${textColor} ${titleClassName}`}
             >
               {titleParts.map((part, index) => (
                 <span key={index}>{part} </span>

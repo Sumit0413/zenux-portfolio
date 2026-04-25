@@ -19,25 +19,7 @@ export const servicesData = [
       },
     ],
   },
-  {
-    title: "DevOps & Cloud Solutions",
-    description:
-      "Deploying software shouldn't be a gamble. I automate infrastructure, enforce security, and leverage cloud platforms (AWS/Azure) to keep your app running smoothly—24/7, at any scale.",
-    items: [
-      {
-        title: "CI/CD Pipelines",
-        description: "(GitHub Actions, Docker, Kubernetes)",
-      },
-      {
-        title: "Server Management ",
-        description: "(Linux, Nginx, Load Balancing)",
-      },
-      {
-        title: "Performance Tuning",
-        description: "(Caching, Compression, Lighthouse 90+ Scores)",
-      },
-    ],
-  },
+  
   {
     title: "Security & Optimization",
     description:
