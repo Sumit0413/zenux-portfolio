@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 const Services = () => {
-  const text = `I build secure, high-performance full-stack apps
+  const text = `We build secure, high-performance full-stack apps
     with smooth UX to drive growth 
     not headaches.`;
   const serviceRefs = useRef([]);

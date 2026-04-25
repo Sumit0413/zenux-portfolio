@@ -6,7 +6,7 @@ import gsap from "gsap";
 
 const About = () => {
   const text = `Passionate about clean architecture
-    I build scalable, high-performance solutions
+    We build scalable, high-performance solutions
     from prototype to production`;
   const aboutText = `At Zenux, we turn ideas into fast, secure, and scalable digital products—combining modern UI, robust backends, and cloud infrastructure.
   When we’re not building:
