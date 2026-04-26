@@ -3,6 +3,16 @@ import { socials } from "../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Link } from "react-scroll";
+import FlowingMenu from './FlowingMenu';
+
+const menuItems = [
+  { link: 'home', text: 'Home', image: 'https://picsum.photos/600/400?random=1' },
+  { link: 'services', text: 'Services', image: 'https://picsum.photos/600/400?random=2' },
+  { link: 'about', text: 'About', image: 'https://picsum.photos/600/400?random=3' },
+  { link: 'work', text: 'Work', image: 'https://picsum.photos/600/400?random=4' },
+  { link: 'contact', text: 'Contact', image: 'https://picsum.photos/600/400?random=5' }
+];
+
 
 const Navbar = () => {
   const navRef = useRef(null);
@@ -99,24 +109,18 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className="fixed z-50 flex flex-col justify-between w-full h-full px-10 uppercase bg-black text-white/80 py-28 gap-y-10 md:w-1/2 md:left-1/2"
+        className="fixed z-50 flex flex-col justify-between w-full h-full px-10 uppercase bg-black text-white/80 py-16 gap-y-10 md:w-1/2 md:left-1/2"
       >
-        <div className="flex flex-col text-5xl gap-y-2 md:text-6xl lg:text-8xl">
-          {["home", "services", "about", "work", "contact"].map(
-            (section, index) => (
-              <div key={index} ref={(el) => (linksRef.current[index] = el)}>
-                <Link
-                  className="transition-all duration-300 cursor-pointer hover:text-white"
-                  to={`${section}`}
-                  smooth
-                  offset={0}
-                  duration={2000}
-                >
-                  {section}
-                </Link>
-              </div>
-            )
-          )}
+        <div ref={(el) => (linksRef.current[0] = el)} className="relative flex-1">
+          <FlowingMenu 
+            items={menuItems}
+            speed={15}
+            textColor="#ffffff"
+            bgColor="#000000"
+            marqueeBgColor="#ffffff" 
+            marqueeTextColor="#000000"
+            borderColor="transparent"
+          />
         </div>
         <div
           ref={contactRef}
@@ -125,7 +129,7 @@ const Navbar = () => {
           <div className="font-light">
             <p className="tracking-wider text-white/50">E-mail</p>
             <p className="text-xl tracking-widest lowercase text-pretty">
-              zenux.dev@gmail.com
+              Arkeno.dev@gmail.com
             </p>
           </div>
           <div className="font-light">
@@ -147,7 +151,7 @@ const Navbar = () => {
         </div>
       </nav>
       <div
-        className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10"
+        className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#cfa355] rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10"
         onClick={toggleMenu}
         style={
           showBurger
@@ -157,11 +161,11 @@ const Navbar = () => {
       >
         <span
           ref={topLineRef}
-          className="block w-8 h-0.5 bg-white rounded-full origin-center"
+          className="block w-8 h-0.5 bg-black rounded-full origin-center"
         ></span>
         <span
           ref={bottomLineRef}
-          className="block w-8 h-0.5 bg-white rounded-full origin-center"
+          className="block w-8 h-0.5 bg-black rounded-full origin-center"
         ></span>
       </div>
     </>

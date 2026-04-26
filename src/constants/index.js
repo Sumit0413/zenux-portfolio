@@ -153,7 +153,7 @@ export const projects = [
   },
 ];
 export const socials = [
-  { name: "Instagram", href: "https://www.instagram.com/zenux.dev/" },
+  { name: "Instagram", href: "https://www.instagram.com/Arkeno.dev/" },
  
   { name: "LinkedIn", href: "https://www.linkedin.com/in/ali-sanati/" },
  

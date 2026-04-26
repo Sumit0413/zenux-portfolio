@@ -11,8 +11,8 @@ results driven webs/apps`;
   return (
     <section id="home" className="flex flex-col justify-end min-h-screen">
       <AnimatedHeaderSection
-        subTitle={"404 No Bugs Found"}
-        title={"Zenux.dev"}
+        
+        title={"Arkeno.dev"}
         text={text}
         textColor={"text-black"}
         titleClassName={"leading-[0.92] sm:leading-[0.95]"}

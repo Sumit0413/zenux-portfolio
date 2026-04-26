@@ -8,7 +8,7 @@ const About = () => {
   const text = `Passionate about clean architecture
     We build scalable, high-performance solutions
     from prototype to production`;
-  const aboutText = `At Zenux, we turn ideas into fast, secure, and scalable digital products—combining modern UI, robust backends, and cloud infrastructure.
+  const aboutText = `At Arkeno, we turn ideas into fast, secure, and scalable digital products—combining modern UI, robust backends, and cloud infrastructure.
   When we’re not building:
 ⚡️ Experimenting with new technologies and refining our workflows
 🎥 Sharing knowledge with the developer community through content and insights
@@ -50,7 +50,7 @@ const About = () => {
       <div className="flex flex-col items-center justify-between gap-16 px-10 pb-16 text-xl font-light tracking-wide lg:flex-row md:text-2xl lg:text-3xl text-white/60">
         <img
           ref={imgRef}
-          src="images/zenuxbaw.webp"
+          src="images/Arkenobaw.webp"
           alt="man"
           className="w-md rounded-3xl"
         />
