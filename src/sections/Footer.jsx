@@ -273,7 +273,7 @@ export function CinematicFooter() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
-      
+
       {/* 
         The "Curtain Reveal" Wrapper:
         It sits in standard flow. Because it has clip-path, its contents
@@ -286,7 +286,7 @@ export function CinematicFooter() {
       >
         {/* The actual footer stays fixed to the viewport underneath everything */}
         <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-black text-white cinematic-footer-wrapper">
-          
+
           {/* Ambient Light & Grid Background */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
           <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
@@ -296,7 +296,7 @@ export function CinematicFooter() {
             ref={giantTextRef}
             className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
           >
-            ZENUX
+            Arkeno
           </div>
 
           {/* 1. Diagonal Sleek Marquee (Top of footer) */}
@@ -326,7 +326,7 @@ export function CinematicFooter() {
                   </svg>
                   Contact Me
                 </MagneticButton>
-                
+
                 <MagneticButton as="a" href="#" className="footer-glass-pill px-10 py-5 rounded-full text-white font-bold text-sm md:text-base flex items-center gap-3 group">
                   <svg className="w-6 h-6 text-white/50 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0222 3.503C15.5902 8.242 13.8533 7.85 12 7.85c-1.8533 0-3.5902.392-5.1369 1.1004L4.841 5.4475a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3436-4.1021-2.6893-7.5743-6.1185-9.4396" />
@@ -352,10 +352,10 @@ export function CinematicFooter() {
 
           {/* 3. Bottom Bar / Credits */}
           <div className="relative z-20 w-full pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
-            
+
             {/* Copyright */}
             <div className="text-white/50 text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1">
-              © 2026 Zenux. All rights reserved.
+              © 2026 Arkeno. All rights reserved.
             </div>
 
             {/* "Made with Love" Badge */}
