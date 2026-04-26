@@ -119,19 +119,19 @@ body {
 }
 
 @utility banner-text-responsive {
-  @apply text-[68px] sm:text-[118px] md:text-[126px] lg:text-[152px] leading-9 sm:leading-16 lg:leading-20;
+  @apply text-[clamp(3rem,12vw,68px)] sm:text-[118px] md:text-[126px] lg:text-[152px] leading-tight sm:leading-16 lg:leading-20 break-words;
 }
 
 @utility value-text-responsive {
-  @apply text-2xl md:text-[26px] lg:text-[32px];
+  @apply text-[clamp(1.2rem,5vw,24px)] md:text-[26px] lg:text-[32px];
 }
 
 @utility marquee-text-responsive {
-  @apply text-[28px] sm:text-[36px] lg:text-[42px];
+  @apply text-[clamp(1.5rem,6vw,28px)] sm:text-[36px] lg:text-[42px];
 }
 
 @utility contact-text-responsive {
-  @apply text-[42px] sm:text-[52px] md:text-[62px] lg:text-[100px];
+  @apply text-[clamp(1.8rem,8vw,42px)] sm:text-[52px] md:text-[62px] lg:text-[100px];
 }
 
 
