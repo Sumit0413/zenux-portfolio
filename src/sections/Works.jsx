@@ -25,7 +25,7 @@ const Works = () => {
         itemStackDistance={35}
         stackPosition="25%"
         baseScale={0.82}
-        blurAmount={2}
+        blurAmount={0}
       >
         {projects.map((project, index) => {
           const hasLink = Boolean(project.href?.trim());

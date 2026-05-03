@@ -20,6 +20,7 @@ const ScrollStack = ({
   const scrollerRef = useRef(null);
   const cardsRef = useRef([]);
   const rafRef = useRef(null);
+  const pendingRafRef = useRef(null);
   const lastScrollRef = useRef(-1);
   const offsetsRef = useRef([]);
   const lastAppliedRef = useRef(new Map());
@@ -139,12 +140,19 @@ const ScrollStack = ({
       card.style.transformOrigin = 'top center';
     });
 
-    // ── 3. Start rAF loop (only scale/blur, never translateY) ──
-    const raf = () => {
-      updateScales();
-      rafRef.current = requestAnimationFrame(raf);
+    // ── 3. Listen to scroll events, batch DOM writes into rAF ──
+    // This avoids running JS 60× per second when the user isn't scrolling.
+    const onScroll = () => {
+      if (pendingRafRef.current) return; // already scheduled
+      pendingRafRef.current = requestAnimationFrame(() => {
+        pendingRafRef.current = null;
+        updateScales();
+      });
     };
-    rafRef.current = requestAnimationFrame(raf);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    rafRef.current = onScroll; // store ref for cleanup
+    // Run once on mount to set initial state
+    updateScales();
 
     // ── 4. Re-measure on resize ──
     const onResize = () => {
@@ -180,8 +188,9 @@ const ScrollStack = ({
     window.addEventListener('resize', onResize);
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener('scroll', rafRef.current);
       window.removeEventListener('resize', onResize);
+      if (pendingRafRef.current) cancelAnimationFrame(pendingRafRef.current);
       stackCompletedRef.current = false;
       cardsRef.current = [];
       lastAppliedRef.current.clear();

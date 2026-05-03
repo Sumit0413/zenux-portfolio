@@ -22,7 +22,7 @@ const About = () => {
                 trigger: "#about",
                 start: "bottom 80%",
                 end: "bottom 20%",
-                scrub: true,
+                scrub: 1,
                 markers: false,
             },
             ease: "power1.inOut",
@@ -35,7 +35,7 @@ const About = () => {
             clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
             duration: 2,
             ease: "power4.out",
-            scrollTrigger: { trigger: imgRef.current },
+            scrollTrigger: { trigger: imgRef.current, once: true },
         });
     });
     return (
