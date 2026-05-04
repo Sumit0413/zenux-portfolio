@@ -15,7 +15,6 @@
   position: relative;
   border-radius: 20px;
   transition: box-shadow 0.4s ease;
-  contain: layout style paint;
 }
 
 .scroll-stack-end {
