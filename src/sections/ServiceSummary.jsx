@@ -34,29 +34,29 @@ const ServiceSummary = () => {
     });
   });
   return (
-    <section className="mt-20 overflow-hidden font-light leading-snug text-center mb-42 contact-text-responsive">
-      <div id="title-service-1">
-        <p>Architucture</p>
+    <section className="mt-20 overflow-hidden font-light leading-snug text-center mb-32 md:mb-42 contact-text-responsive text-[#f5f0e8] bg-[#080808] px-4 md:px-0">
+      <div id="title-service-1" className="hover:text-[#c9a84c] transition-colors duration-500 cursor-default">
+        <p>Architecture</p>
       </div>
       <div
         id="title-service-2"
-        className="flex items-center justify-center gap-3 translate-x-16"
+        className="flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-3 translate-x-4 md:translate-x-16 hover:text-[#c9a84c] transition-colors duration-500 cursor-default"
       >
         <p className="font-normal">Development</p>
-        <div className="w-10 h-1 md:w-32 bg-gold" />
+        <div className="w-6 h-1 md:w-32 bg-[#c9a84c] shrink-0" />
         <p>Deployment</p>
       </div>
       <div
         id="title-service-3"
-        className="flex items-center justify-center gap-3 -translate-x-48"
+        className="flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-3 -translate-x-8 md:-translate-x-48 hover:text-[#c9a84c] transition-colors duration-500 cursor-default"
       >
         <p>APIs</p>
-        <div className="w-10 h-1 md:w-32 bg-gold" />
+        <div className="w-6 h-1 md:w-32 bg-[#c9a84c] shrink-0" />
         <p className="italic">Frontends</p>
-        <div className="w-10 h-1 md:w-32 bg-gold" />
+        <div className="w-6 h-1 md:w-32 bg-[#c9a84c] shrink-0 hidden sm:block" />
         <p>Scalability</p>
       </div>
-      <div id="title-service-4" className="translate-x-48">
+      <div id="title-service-4" className="translate-x-8 md:translate-x-48 hover:text-[#c9a84c] transition-colors duration-500 cursor-default">
         <p>Databases</p>
       </div>
     </section>

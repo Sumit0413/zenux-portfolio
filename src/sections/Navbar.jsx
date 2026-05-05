@@ -13,7 +13,6 @@ const menuItems = [
   { link: 'contact', text: 'Contact', image: 'https://picsum.photos/600/400?random=5' }
 ];
 
-
 const Navbar = () => {
   const navRef = useRef(null);
   const linksRef = useRef([]);
@@ -24,6 +23,7 @@ const Navbar = () => {
   const iconTl = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [showBurger, setShowBurger] = useState(true);
+
   useGSAP(() => {
     gsap.set(navRef.current, { xPercent: 100 });
     gsap.set([linksRef.current, contactRef.current], {
@@ -109,17 +109,17 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className="fixed z-50 flex flex-col justify-between w-full h-full px-10 uppercase bg-black text-white/80 py-16 gap-y-10 md:w-1/2 md:left-1/2"
+        className="fixed z-50 flex flex-col justify-between w-full h-full px-6 md:px-10 uppercase bg-[#080808]/95 backdrop-blur-xl text-[#f5f0e8] py-24 md:py-16 gap-y-10 md:w-1/2 md:left-1/2 border-l border-[#c9a84c]/20 shadow-2xl"
       >
         <div ref={(el) => (linksRef.current[0] = el)} className="relative flex-1">
           <FlowingMenu 
             items={menuItems}
             speed={15}
-            textColor="#ffffff"
-            bgColor="#000000"
-            marqueeBgColor="#ffffff" 
-            marqueeTextColor="#000000"
-            borderColor="transparent"
+            textColor="#f5f0e8"
+            bgColor="transparent"
+            marqueeBgColor="#c9a84c" 
+            marqueeTextColor="#080808"
+            borderColor="rgba(201,168,76,0.2)"
           />
         </div>
         <div
@@ -127,19 +127,19 @@ const Navbar = () => {
           className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
         >
           <div className="font-light">
-            <p className="tracking-wider text-white/50">E-mail</p>
-            <p className="text-xl tracking-widest lowercase text-pretty">
+            <p className="tracking-wider text-[#f5f0e8]/50">E-mail</p>
+            <p className="text-xl tracking-widest lowercase text-pretty hover:text-[#c9a84c] transition-colors cursor-pointer">
               Arkeno.dev@gmail.com
             </p>
           </div>
           <div className="font-light">
-            <p className="tracking-wider text-white/50">Social Media</p>
+            <p className="tracking-wider text-[#f5f0e8]/50">Social Media</p>
             <div className="flex flex-col flex-wrap md:flex-row gap-x-2">
               {socials.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
-                  className="text-sm leading-loose tracking-widest uppercase hover:text-white transition-colors duration-300"
+                  className="text-sm leading-loose tracking-widest uppercase hover:text-[#c9a84c] transition-colors duration-300"
                 >
                   {"{ "}
                   {social.name}
@@ -150,22 +150,31 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      
+      {/* Top Navbar Header (Desktop) */}
+      <div className="fixed top-0 left-0 w-full z-40 px-6 md:px-10 py-4 md:py-6 flex justify-between items-center bg-[#080808]/80 backdrop-blur-md border-b border-[#111111] transition-transform duration-300 pointer-events-none">
+          <div className="text-[#c9a84c] font-black text-xl md:text-2xl tracking-widest pointer-events-auto cursor-pointer">
+            ARKENO.DEV
+          </div>
+      </div>
+
+      {/* Burger Menu Button */}
       <div
-        className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#cfa355] rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10"
+        className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#c9a84c] rounded-full cursor-pointer w-12 h-12 md:w-16 md:h-16 top-3 md:top-4 right-6 md:right-10 hover:bg-[#e0be63] shadow-[0_0_20px_rgba(201,168,76,0.3)] border border-[#e0be63]"
         onClick={toggleMenu}
         style={
           showBurger
             ? { clipPath: "circle(50% at 50% 50%)" }
-            : { clipPath: "circle(0% at 50% 50%)" }
+            : { clipPath: "circle(0% at 50% 50%)", transform: "scale(0.8)", opacity: 0 }
         }
       >
         <span
           ref={topLineRef}
-          className="block w-8 h-0.5 bg-black rounded-full origin-center"
+          className="block w-5 md:w-6 h-0.5 bg-[#080808] rounded-full origin-center"
         ></span>
         <span
           ref={bottomLineRef}
-          className="block w-8 h-0.5 bg-black rounded-full origin-center"
+          className="block w-5 md:w-6 h-0.5 bg-[#080808] rounded-full origin-center"
         ></span>
       </div>
     </>
