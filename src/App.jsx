@@ -1,59 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "./sections/Navbar";
 import Hero from "./sections/Hero";
-import ServiceSummary from "./sections/ServiceSummary";
+import MarqueeBelt from "./sections/MarqueeBelt";
 import Services from "./sections/Services";
-import ReactLenis from "lenis/react";
-import About from "./sections/About";
 import Works from "./sections/Works";
+import About from "./sections/About";
+import ServiceSummary from "./sections/ServiceSummary";
+import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 const App = () => {
-  const [isReady, setIsReady] = useState(false);
-
+  // Global scroll-reveal observer
   useEffect(() => {
-    // Simple fast loader for CSS/Images to mount
-    const timer = setTimeout(() => {
-      setIsReady(true);
-    }, 1000);
-    return () => clearTimeout(timer);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    // Observe all .reveal elements that aren't already visible
+    const observe = () => {
+      document.querySelectorAll(".reveal:not(.visible)").forEach((el) => {
+        observer.observe(el);
+      });
+    };
+
+    // Initial observe + re-observe after a tick to catch all sections
+    observe();
+    const t = setTimeout(observe, 500);
+    return () => {
+      clearTimeout(t);
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <ReactLenis
-      root
-      className="relative w-full min-h-screen overflow-x-hidden bg-[#080808]"
-      options={{
-        lerp: 0.1,
-        smoothWheel: true,
-        syncTouch: false,
-        duration: 1.2,
-      }}
-    >
-      {!isReady && (
-        <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#080808] text-[#c9a84c] transition-opacity duration-700 font-light">
-          <p className="mb-4 text-xl tracking-widest animate-pulse font-bold">
-            ARKENO.DEV
-          </p>
-          <div className="relative h-1 overflow-hidden rounded w-40 bg-[#111111]">
-            <div className="absolute top-0 left-0 h-full transition-all duration-1000 bg-[#c9a84c] w-full animate-pulse"></div>
-          </div>
-        </div>
-      )}
-      <div
-        className={`${
-          isReady ? "opacity-100" : "opacity-0"
-        } transition-opacity duration-1000`}
-      >
-        <Navbar />
+    <div className="relative w-full min-h-screen overflow-x-hidden">
+      <Navbar />
+      <main>
         <Hero />
-        <ServiceSummary />
+        <MarqueeBelt />
         <Services />
-        <About />
         <Works />
-        <Footer />
-      </div>
-    </ReactLenis>
+        <About />
+        <ServiceSummary />
+        <Contact />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
   );
 };
 

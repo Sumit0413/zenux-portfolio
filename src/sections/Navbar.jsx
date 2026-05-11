@@ -1,184 +1,95 @@
-import React, { useEffect, useRef, useState } from "react";
-import { socials } from "../constants";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { Link } from "react-scroll";
-import FlowingMenu from './FlowingMenu';
+import React, { useState } from "react";
 
-const menuItems = [
-  { link: 'home', text: 'Home', image: 'https://picsum.photos/600/400?random=1' },
-  { link: 'services', text: 'Services', image: 'https://picsum.photos/600/400?random=2' },
-  { link: 'about', text: 'About', image: 'https://picsum.photos/600/400?random=3' },
-  { link: 'work', text: 'Work', image: 'https://picsum.photos/600/400?random=4' },
-  { link: 'contact', text: 'Contact', image: 'https://picsum.photos/600/400?random=5' }
+const NAV_LINKS = [
+  { label: "Work", href: "#portfolio" },
+  { label: "Services", href: "#services" },
+  { label: "Process", href: "#process" },
+  { label: "About", href: "#testimonials" },
 ];
 
-const Navbar = () => {
-  const navRef = useRef(null);
-  const linksRef = useRef([]);
-  const contactRef = useRef(null);
-  const topLineRef = useRef(null);
-  const bottomLineRef = useRef(null);
-  const tl = useRef(null);
-  const iconTl = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [showBurger, setShowBurger] = useState(true);
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  useGSAP(() => {
-    gsap.set(navRef.current, { xPercent: 100 });
-    gsap.set([linksRef.current, contactRef.current], {
-      autoAlpha: 0,
-      x: -20,
-    });
-
-    tl.current = gsap
-      .timeline({ paused: true })
-      .to(navRef.current, {
-        xPercent: 0,
-        duration: 1,
-        ease: "power3.out",
-      })
-      .to(
-        linksRef.current,
-        {
-          autoAlpha: 1,
-          x: 0,
-          stagger: 0.1,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        "<"
-      )
-      .to(
-        contactRef.current,
-        {
-          autoAlpha: 1,
-          x: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        "<+0.2"
-      );
-
-    iconTl.current = gsap
-      .timeline({ paused: true })
-      .to(topLineRef.current, {
-        rotate: 45,
-        y: 3.3,
-        duration: 0.3,
-        ease: "power2.inOut",
-      })
-      .to(
-        bottomLineRef.current,
-        {
-          rotate: -45,
-          y: -3.3,
-          duration: 0.3,
-          ease: "power2.inOut",
-        },
-        "<"
-      );
-  }, []);
-
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      setShowBurger(currentScrollY <= lastScrollY || currentScrollY < 10);
-
-      lastScrollY = currentScrollY;
-    };
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const toggleMenu = () => {
-    if (isOpen) {
-      tl.current.reverse();
-      iconTl.current.reverse();
-    } else {
-      tl.current.play();
-      iconTl.current.play();
-    }
-    setIsOpen(!isOpen);
-  };
   return (
-    <>
+    <header className="sticky top-0 z-50 w-full px-4 py-3 flex items-center justify-center">
       <nav
-        ref={navRef}
-        className="fixed z-50 flex flex-col justify-between w-full h-full px-6 md:px-10 uppercase bg-[#080808]/95 backdrop-blur-xl text-[#f5f0e8] py-24 md:py-16 gap-y-10 md:w-1/2 md:left-1/2 border-l border-[#c9a84c]/20 shadow-2xl"
+        className="nb-card w-full max-w-6xl bg-white px-6 py-3 flex items-center justify-between"
+        role="navigation"
+        aria-label="Main navigation"
       >
-        <div ref={(el) => (linksRef.current[0] = el)} className="relative flex-1">
-          <FlowingMenu 
-            items={menuItems}
-            speed={15}
-            textColor="#f5f0e8"
-            bgColor="transparent"
-            marqueeBgColor="#c9a84c" 
-            marqueeTextColor="#080808"
-            borderColor="rgba(201,168,76,0.2)"
-          />
-        </div>
-        <div
-          ref={contactRef}
-          className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-0 heading-xl text-2xl text-navy select-none">
+          Arkeno
+          <span className="logo-dot text-pink">.</span>
+        </a>
+
+        {/* Desktop Links */}
+        <ul className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((link) => (
+            <li key={link.label}>
+              <a
+                href={link.href}
+                className="font-black text-sm uppercase tracking-tight text-navy hover:text-orange transition-colors duration-200"
+                style={{ fontFamily: "Cabinet Grotesk, sans-serif", fontWeight: 900 }}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA Button */}
+        <a
+          href="#contact"
+          className="nb-btn bg-teal text-white px-4 md:px-6 py-2 text-xs md:text-sm mr-2 md:mr-0"
+          style={{ fontFamily: "Cabinet Grotesk, sans-serif", fontWeight: 900 }}
         >
-          <div className="font-light">
-            <p className="tracking-wider text-[#f5f0e8]/50">E-mail</p>
-            <p className="text-xl tracking-widest lowercase text-pretty hover:text-[#c9a84c] transition-colors cursor-pointer">
-              Arkeno.dev@gmail.com
-            </p>
-          </div>
-          <div className="font-light">
-            <p className="tracking-wider text-[#f5f0e8]/50">Social Media</p>
-            <div className="flex flex-col flex-wrap md:flex-row gap-x-2">
-              {socials.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="text-sm leading-loose tracking-widest uppercase hover:text-[#c9a84c] transition-colors duration-300"
-                >
-                  {"{ "}
-                  {social.name}
-                  {" }"}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+          Let's Talk
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="hidden sm:inline-block">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden nb-btn bg-orange text-white p-2"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <path d="M3 12h18M3 6h18M3 18h18" />
+            </svg>
+          )}
+        </button>
       </nav>
-      
-      {/* Top Navbar Header (Desktop) */}
-      <div className="fixed top-0 left-0 w-full z-40 px-6 md:px-10 py-4 md:py-6 flex justify-between items-center bg-[#080808]/80 backdrop-blur-md border-b border-[#111111] transition-transform duration-300 pointer-events-none">
-          <div className="text-[#c9a84c] font-black text-xl md:text-2xl tracking-widest pointer-events-auto cursor-pointer">
-            ARKENO.DEV
-          </div>
-      </div>
 
-      {/* Burger Menu Button */}
-      <div
-        className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#c9a84c] rounded-full cursor-pointer w-12 h-12 md:w-16 md:h-16 top-3 md:top-4 right-6 md:right-10 hover:bg-[#e0be63] shadow-[0_0_20px_rgba(201,168,76,0.3)] border border-[#e0be63]"
-        onClick={toggleMenu}
-        style={
-          showBurger
-            ? { clipPath: "circle(50% at 50% 50%)" }
-            : { clipPath: "circle(0% at 50% 50%)", transform: "scale(0.8)", opacity: 0 }
-        }
-      >
-        <span
-          ref={topLineRef}
-          className="block w-5 md:w-6 h-0.5 bg-[#080808] rounded-full origin-center"
-        ></span>
-        <span
-          ref={bottomLineRef}
-          className="block w-5 md:w-6 h-0.5 bg-[#080808] rounded-full origin-center"
-        ></span>
-      </div>
-    </>
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="absolute top-full left-4 right-4 mt-2 nb-card bg-white p-6 flex flex-col gap-4 md:hidden">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="heading-xl text-2xl text-navy hover:text-orange transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setMenuOpen(false)}
+            className="nb-btn bg-teal text-white px-6 py-3 text-base justify-center"
+          >
+            Let's Talk
+          </a>
+        </div>
+      )}
+    </header>
   );
-};
-
-export default Navbar;
+}

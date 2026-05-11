@@ -1,10 +1,26 @@
 import React from "react";
+import Link from "next/link";
 import { socials } from "../constants";
 
 const FOOTER_LINKS = {
-  Services: ["Web Design", "Branding", "Motion", "Development"],
-  Company: ["About", "Process", "Careers", "Blog"],
-  Legal: ["Privacy Policy", "Terms", "Cookies", "Sitemap"],
+  Services: [
+    { label: "Web Design", href: "/services/web-design" },
+    { label: "Branding", href: "/services/branding" },
+    { label: "Motion", href: "/services/motion" },
+    { label: "Development", href: "/services/development" }
+  ],
+  Company: [
+    { label: "About", href: "/about" },
+    { label: "Process", href: "/process" },
+    { label: "Careers", href: "/careers" },
+    { label: "Blog", href: "/blog" }
+  ],
+  Legal: [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Cookies", href: "/cookies" },
+    { label: "Sitemap", href: "/sitemap" }
+  ],
 };
 
 export default function Footer() {
@@ -23,10 +39,10 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-1 flex flex-col gap-6">
             <div>
               <span
-                className="heading-xl text-white"
+                className="heading-xl text-white block"
                 style={{ fontSize: "clamp(3rem, 6vw, 5rem)", lineHeight: 1 }}
               >
-                 ARK
+                ZEN
                 <span className="logo-dot text-pink">.</span>
                 <br />
                 UX
@@ -68,14 +84,14 @@ export default function Footer() {
               </h3>
               <ul className="flex flex-col gap-3">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
                       className="text-white/50 hover:text-white transition-colors text-sm"
                       style={{ fontFamily: "Satoshi, sans-serif" }}
                     >
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -85,9 +101,7 @@ export default function Footer() {
 
 
         {/* Bottom bar */}
-        <div
-          className="border-t-4 border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
-        >
+        <div className="border-t-4 border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <p
             className="text-white/30 text-sm"
             style={{ fontFamily: "Satoshi, sans-serif" }}

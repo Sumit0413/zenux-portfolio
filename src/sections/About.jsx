@@ -1,89 +1,137 @@
-import { useRef } from "react";
-import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
-import { AnimatedTextLines } from "../components/AnimatedTextLines";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import React from "react";
 
-const About = () => {
-    const text = `Passionate about clean architecture
-    We build scalable, high-performance solutions
-    from prototype to production`;
-    
-    // Using simple html instead of string to allow gold highlights in the text lines directly,
-    // but AnimatedTextLines might just take a string. I will add a styled div below it for the bullets.
-    
-    const aboutText = `At Arkeno, we turn ideas into fast, secure, and scalable digital products—combining modern UI, robust backends, and cloud infrastructure.`;
-    
-    const imgRef = useRef(null);
-    useGSAP(() => {
-        gsap.to("#about", {
-            scale: 0.95,
-            scrollTrigger: {
-                trigger: "#about",
-                start: "bottom 80%",
-                end: "bottom 20%",
-                scrub: 1,
-                markers: false,
-            },
-            ease: "power1.inOut",
-        });
+const STEPS = [
+  {
+    num: "01",
+    title: "Discover",
+    desc: "Deep dive into your brand, audience, and competitive landscape to uncover real opportunities.",
+  },
+  {
+    num: "02",
+    title: "Design",
+    desc: "Craft bold visual concepts and interactive prototypes with rapid, iterative feedback loops.",
+  },
+  {
+    num: "03",
+    title: "Build",
+    desc: "Engineer pixel-perfect, performant code with modern frameworks and zero compromise.",
+  },
+  {
+    num: "04",
+    title: "Launch",
+    desc: "Ship fast, monitor closely, iterate intelligently. We don't just deliver — we make it land.",
+  },
+];
 
-        gsap.set(imgRef.current, {
-            clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-        });
-        gsap.to(imgRef.current, {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            duration: 2,
-            ease: "power4.out",
-            scrollTrigger: { trigger: imgRef.current, once: true },
-        });
-    });
-    return (
-        <section id="about" className="min-h-screen bg-[#080808] border-t border-[#111111] py-10">
-            <AnimatedHeaderSection
-                subTitle={"Code with purpose, Built to scale"}
-                title={"About"}
-                text={text}
-                textColor={"text-[#f5f0e8]"}
-                withScrollTrigger={true}
-            />
-            <div className="flex flex-col items-start justify-between gap-10 md:gap-16 px-6 md:px-10 pb-16 text-lg md:text-2xl lg:text-3xl font-light tracking-wide lg:flex-row text-[#f5f0e8]/80">
-                <img
-                    ref={imgRef}
-                    src="images/Arkenobaw.webp"
-                    alt="man"
-                    className="w-full lg:w-1/2 rounded-none border border-[#c9a84c]/20 object-cover"
-                    style={{ aspectRatio: '4/5' }}
-                />
-                
-                <div className="w-full lg:w-1/2 flex flex-col gap-8 md:gap-10">
-                    <AnimatedTextLines text={aboutText} className={"w-full leading-relaxed"} />
-                    
-                    <div className="flex flex-col gap-4 md:gap-6 text-base md:text-xl lg:text-2xl mt-2 md:mt-4">
-                        <p className="text-[#c9a84c] tracking-widest uppercase text-xs md:text-sm font-bold">When we're not building:</p>
-                        <ul className="flex flex-col gap-4 list-none p-0 m-0">
-                            <li className="flex items-start gap-4">
-                                <span className="text-[#c9a84c]">⚡</span>
-                                <span>Experimenting with new <span className="text-[#c9a84c]">technologies</span> and refining our workflows.</span>
-                            </li>
-                            <li className="flex items-start gap-4">
-                                <span className="text-[#c9a84c]">🎥</span>
-                                <span>Sharing knowledge with the developer community through <span className="text-[#c9a84c]">content and insights</span>.</span>
-                            </li>
-                            <li className="flex items-start gap-4">
-                                <span className="text-[#c9a84c]">🚀</span>
-                                <span>Optimizing <span className="text-[#c9a84c]">performance, scalability,</span> and system reliability.</span>
-                            </li>
-                            <li className="flex items-start gap-4">
-                                <span className="text-[#c9a84c]">🎯</span>
-                                <span>Continuously improving to deliver better, faster, and smarter solutions.</span>
-                            </li>
-                        </ul>
-                    </div>
+export default function Process() {
+  return (
+    <section
+      id="process"
+      className="bg-grid px-5 py-10 md:py-24 md:px-4"
+      style={{ background: "#F8FAFC" }}
+      aria-labelledby="process-heading"
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-16 reveal">
+          <span
+            className="text-orange text-sm uppercase tracking-widest"
+            style={{ fontFamily: "Satoshi, sans-serif", fontWeight: 700 }}
+          >
+            How we work
+          </span>
+          <h2
+            id="process-heading"
+            className="heading-xl mt-2"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", color: "#0F172A" }}
+          >
+            THE
+            <br />
+            <span className="heading-stroke">PROCESS</span>
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Left: Steps */}
+          <div className="flex flex-col gap-0">
+            {STEPS.map((step, i) => (
+              <div
+                key={step.num}
+                className="process-step flex gap-6 items-start pb-8 reveal group cursor-default"
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
+                {/* Number */}
+                <div
+                  className="process-number flex-shrink-0"
+                  style={{ minWidth: "5rem" }}
+                >
+                  {step.num}
                 </div>
-            </div>
-        </section>
-    );
-};
 
-export default About;
+                {/* Content */}
+                <div className="pt-4 border-t-4 border-navy flex-1">
+                  <h3
+                    className="heading-xl mb-2 group-hover:text-orange transition-colors"
+                    style={{ fontSize: "1.75rem", color: "#0F172A" }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    style={{ fontFamily: "Satoshi, sans-serif", color: "#0F172A", opacity: 0.65, lineHeight: 1.6 }}
+                  >
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right: Image Container */}
+          <div className="flex justify-center items-start pt-8 reveal">
+            <div
+              className="process-img-wrap nb-card overflow-hidden"
+              style={{
+                transform: "rotate(3deg)",
+                width: "100%",
+                maxWidth: "400px",
+                aspectRatio: "4/5",
+                background: "#0F172A",
+              }}
+            >
+              {/* Gradient artwork */}
+              <div
+                className="process-img w-full h-full flex items-center justify-center"
+                style={{
+                  background: "linear-gradient(135deg, #FF6B35 0%, #FF3366 40%, #0F172A 100%)",
+                }}
+              >
+                <div className="text-center p-8">
+                  <div
+                    className="heading-xl text-white mb-4"
+                    style={{ fontSize: "6rem", lineHeight: 1 }}
+                  >
+                    AK
+                  </div>
+                  <div
+                    className="text-white/60"
+                    style={{ fontFamily: "Playfair Display, serif", fontWeight: 700, fontSize: "1.25rem", fontStyle: "italic" }}
+                  >
+                    "Bold by design."
+                  </div>
+                </div>
+              </div>
+
+              {/* Hover label */}
+              <div
+                className="absolute bottom-4 left-4 right-4 nb-card bg-orange text-white text-center py-2"
+                style={{ fontFamily: "Cabinet Grotesk, sans-serif", fontWeight: 900, fontSize: "0.875rem", textTransform: "uppercase" }}
+              >
+                Hover to Reveal Color →
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

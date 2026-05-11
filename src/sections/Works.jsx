@@ -1,82 +1,174 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
-import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
+import React from "react";
 import { projects } from "../constants";
 
-const Works = () => {
-  const text = `Featured projects that have been meticulously
-    crafted with passion to drive
-    results and impact.`;
-
+export default function Works() {
   return (
-    <section id="work" className="flex flex-col bg-[#080808] border-t border-[#111111]">
-      <AnimatedHeaderSection
-        subTitle={"Logic meets Aesthetics, Seamlessly"}
-        title={"Works"}
-        text={text}
-        textColor={"text-[#f5f0e8]"}
-        withScrollTrigger={true}
-      />
-
-      <div className="flex flex-col w-full px-4 md:px-10 pb-20 gap-8 mt-10">
-        {projects.map((project, index) => {
-          const hasLink = Boolean(project.href?.trim());
-
-          return (
-            <div
-              key={project.id}
-              className="relative w-full h-[50vh] md:h-[80vh] flex flex-col justify-end p-4 sm:p-6 md:p-12 overflow-hidden border border-[#222] bg-[#111111] group cursor-pointer transition-all duration-500 hover:border-[#c9a84c] hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(201,168,76,0.15)]"
-              onClick={() => {
-                if (!hasLink) return;
-                window.open(project.href, "_blank", "noopener,noreferrer");
-              }}
+    <section
+      id="portfolio"
+      className="px-5 py-10 md:py-24 md:px-4"
+      style={{ background: "#2EC4B6" }}
+      aria-labelledby="portfolio-heading"
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 reveal">
+          <div>
+            <span
+              className="text-navy text-sm uppercase tracking-widest"
+              style={{ fontFamily: "Satoshi, sans-serif", fontWeight: 700 }}
             >
-              {/* Background image */}
-              <div className="absolute inset-0 w-full h-full">
-                <img
-                  src={project.bgImage}
-                  alt={`${project.name} background`}
-                  loading="lazy"
-                  className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"
+              Selected Work
+            </span>
+            <h2
+              id="portfolio-heading"
+              className="heading-xl mt-2 text-navy"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+            >
+              OUR
+              <br />
+              <span
+                style={{
+                  WebkitTextStroke: "3px #0F172A",
+                  color: "transparent",
+                  fontFamily: "Cabinet Grotesk, sans-serif",
+                  fontWeight: 900,
+                  textTransform: "uppercase",
+                  lineHeight: 0.9,
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                PORTFOLIO
+              </span>
+            </h2>
+          </div>
+          <a
+            href="#contact"
+            className="nb-btn bg-navy text-white px-8 py-4 text-base self-start md:self-end"
+          >
+            Start a Project
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((project, i) => {
+            const hasLink = Boolean(project.href?.trim());
+            return (
+              <div
+                key={project.id}
+                className="nb-card relative overflow-hidden cursor-pointer reveal group"
+                style={{
+                  aspectRatio: "16/9",
+                  animationDelay: `${i * 80}ms`,
+                  background: "#0F172A",
+                }}
+                onClick={() => {
+                  if (!hasLink) return;
+                  window.open(project.href, "_blank", "noopener,noreferrer");
+                }}
+              >
+                {/* Background image */}
+                {project.bgImage && (
+                  <img
+                    src={project.bgImage}
+                    alt={project.name}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
+                  />
+                )}
+
+                {/* Gradient overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, #0F172A 30%, transparent 100%)",
+                  }}
                 />
-              </div>
 
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent" />
-
-              {/* Arrow link */}
-              <div className="absolute top-4 right-4 md:top-10 md:right-10 w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#f5f0e8]/20 flex items-center justify-center text-[#f5f0e8] group-hover:bg-[#c9a84c] group-hover:text-[#080808] group-hover:border-[#c9a84c] transition-all duration-300">
-                <Icon icon="lucide:arrow-up-right" width={20} height={20} className="md:w-[24px] md:h-[24px]" />
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 flex flex-col gap-2 md:gap-4 text-[#f5f0e8]">
-                <span className="text-[#c9a84c] font-mono tracking-widest text-xs md:text-base">
-                  {String(index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-                </span>
-                <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter uppercase">
-                  {project.name}
-                </h2>
-                <p className="text-sm sm:text-base md:text-xl text-[#f5f0e8]/80 max-w-2xl font-light">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 md:gap-3 mt-2 md:mt-4">
-                  {project.frameworks.map((fw) => (
-                    <span 
-                      key={fw.id} 
-                      className="px-3 py-1.5 md:px-4 md:py-2 border border-[#f5f0e8]/20 text-[10px] md:text-sm tracking-widest uppercase bg-[#080808]/50 backdrop-blur-md text-[#f5f0e8] group-hover:border-[#c9a84c]/50 transition-colors"
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end z-10">
+                  <div className="flex flex-col gap-2">
+                    {/* Counter */}
+                    <span
+                      className="text-orange text-xs tracking-widest"
+                      style={{ fontFamily: "Satoshi, sans-serif", fontWeight: 700 }}
                     >
-                      {fw.name}
+                      {String(i + 1).padStart(2, "0")} /{" "}
+                      {String(projects.length).padStart(2, "0")}
                     </span>
-                  ))}
+
+                    <h3
+                      className="heading-xl text-white"
+                      style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)" }}
+                    >
+                      {project.name}
+                    </h3>
+
+                    <p
+                      className="text-white/70"
+                      style={{
+                        fontFamily: "Satoshi, sans-serif",
+                        fontWeight: 400,
+                        fontSize: "0.8rem",
+                        lineHeight: 1.5,
+                        maxWidth: "28ch",
+                      }}
+                    >
+                      {project.description}
+                    </p>
+
+                    {/* Framework tags */}
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {project.frameworks.map((fw) => (
+                        <span
+                          key={fw.id}
+                          className="nb-card px-2 py-1 text-xs text-white"
+                          style={{
+                            background: "rgba(15,23,42,0.7)",
+                            fontFamily: "Satoshi, sans-serif",
+                            fontWeight: 700,
+                            boxShadow: "3px 3px 0px 0px #FF6B35",
+                            border: "2px solid #F8FAFC",
+                            backdropFilter: "blur(4px)",
+                          }}
+                        >
+                          {fw.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Arrow link badge */}
+                  {hasLink && (
+                    <span
+                      className="nb-card bg-orange text-white px-3 py-2 text-xs flex-shrink-0 self-end"
+                      style={{
+                        fontFamily: "Cabinet Grotesk, sans-serif",
+                        fontWeight: 900,
+                      }}
+                    >
+                      ↗
+                    </span>
+                  )}
                 </div>
+
+
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );
-};
-
-export default Works;
-
+}
